@@ -1,9 +1,9 @@
 import { useState } from "react";
-import "./App.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import io from "socket.io-client";
 import Navigation from "./components/navigation/index";
 import Main from './components/main/index';
+import "./App.css";
 
 const socket = io("http://localhost:4000");
 

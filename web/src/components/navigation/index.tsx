@@ -5,7 +5,7 @@ import "./index.css";
 const Navigation: React.FC = () => {
   return (
     <nav>
-      <div className="nav-wrapper deep-purple darken-3 pd-r-l">
+      <div className="nav-wrapper purple darken-2 pd-r-l">
         <Link to="/" className="brand-logo">
           Messenger
         </Link>
