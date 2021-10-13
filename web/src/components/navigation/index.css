@@ -1,3 +1,28 @@
-.pd-r-l {
-    padding: 0 30px;
+.navigation {
+    background-color: #7B1FA2;
+    padding: 10px 40px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #FFF;
+    font-size: 1.2rem;
+}
+
+#nav-mobile {
+    width: 11%;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.brand-logo {
+    font-size: 2rem;
+    color: #FFF;
+}
+
+.navgation-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

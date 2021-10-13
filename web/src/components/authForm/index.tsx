@@ -9,7 +9,7 @@ const AuthForm: React.FC = () => {
     <div className="login-form-wrapper">
       <Switch>
         <div className="login-form">
-          <Route path="/login">
+          <Route exact path="/login">
             <Login />
           </Route>
           <Route path="/register">

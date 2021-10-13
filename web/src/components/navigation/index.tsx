@@ -4,17 +4,17 @@ import "./index.css";
 
 const Navigation: React.FC = () => {
   return (
-    <nav>
-      <div className="nav-wrapper purple darken-2 pd-r-l">
-        <Link to="/" className="brand-logo">
+    <nav className='navigation'>
+      <div className='navgation-wrapper'>
+        <Link to="/dashboard" className="brand-logo nav-link">
           Messenger
         </Link>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li>
-            <Link to="/">Chat</Link>
+            <Link to="/dashboard" className='nav-link'>Dashboard</Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/about" className='nav-link'>About</Link>
           </li>
         </ul>
       </div>
