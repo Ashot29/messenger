@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import About from "./pages/about";
-import Home from './pages/home';
+import Dashboard from './pages/dashboard';
 
 const Main: React.FC = () => {
   return (
@@ -11,7 +11,7 @@ const Main: React.FC = () => {
           <About />
         </Route>
         <Route path="/">
-          <Home />
+          <Dashboard />
         </Route>
       </Switch>
     </>
