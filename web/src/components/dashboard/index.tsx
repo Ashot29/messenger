@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import SendIcon from "@mui/icons-material/Send";
-import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import "./index.css";
@@ -9,7 +8,7 @@ import "./index.css";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#7B1FA2",
+      main: "#ae3fdd",
     },
   },
 });

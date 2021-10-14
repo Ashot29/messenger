@@ -6,15 +6,15 @@ const Navigation: React.FC = () => {
   return (
     <nav className='navigation'>
       <div className='navgation-wrapper'>
-        <Link to="/dashboard" className="brand-logo nav-link">
+        <Link to='/' className="brand-logo nav-link">
           Messenger
         </Link>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li>
-            <Link to="/dashboard" className='nav-link'>Dashboard</Link>
+            <Link to='/login' className='nav-link'>Login</Link>
           </li>
           <li>
-            <Link to="/about" className='nav-link'>About</Link>
+            <Link to='/register' className='nav-link'>Register</Link>
           </li>
         </ul>
       </div>
