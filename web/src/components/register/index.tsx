@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import LockIcon from "@mui/icons-material/Lock";
 import "./index.css";
 import { usersService, IUser } from "./../../services/users.service";
+import { Redirect, useHistory } from "react-router";
 
 const theme = createTheme({
   palette: {
@@ -30,6 +31,7 @@ const useStyles = makeStyles({
 
 const Register = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [registeringUser, updateRegisteringUser] = useState<IUser>({
     userName: "",
     email: "",
@@ -52,6 +54,7 @@ const Register = () => {
       email: "",
       password: "",
     });
+    history.push('./login')
   }
 
   return (
