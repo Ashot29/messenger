@@ -7,4 +7,8 @@ export interface IUser {
     email: string
 }
 
-export const usersService = new BaseService('users', USER_URL)
+export const usersService = new BaseService('users', USER_URL);
+
+usersService.checkEmail = function(email: string) {
+    return fetch(`${this.url}/${this.prefix}?email=${email}`).then(resp => resp.json())
+}

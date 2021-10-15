@@ -1,6 +1,7 @@
 export class BaseService {
     prefix: string
     url: string
+    checkEmail?: any;
     
     constructor(prefix: string, url: string) {
       this.url = url;
