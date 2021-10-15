@@ -1,16 +1,18 @@
-import { useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import io from "socket.io-client";
 import Navigation from "./components/navigation";
 import Dashboard from "./components/dashboard/index";
 import Login from "./components/login";
 import Register from "./components/register/index";
+import { useSelector } from 'react-redux';
 import "./App.css";
+import { RootState } from "./stateManagement/reducers/rootReducer";
 
 const socket = io("http://localhost:4000");
 
 function App(): JSX.Element {
-  const [isAuth, setIsAuth] = useState(false);
+  const auth = useSelector((state: RootState) => state.auth);
+  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
 
   return (
     <>

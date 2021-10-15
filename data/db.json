@@ -1,10 +1,16 @@
 {
-    "users": [
-        {
-            "id": "aezaKmi",
-            "userName": "Ashot29",
-            "email": "sargsyan.ashot19@gmail.com",
-            "password": "kzkszpj"
-        }
-    ]
+  "users": [
+    {
+      "id": "aezaKmi",
+      "userName": "Ashot29",
+      "email": "sargsyan.ashot19@gmail.com",
+      "password": "kzkszpj"
+    },
+    {
+      "userName": "ashot2001",
+      "email": "ashot20012001@gmail.com",
+      "password": "qwerty1",
+      "id": "37CskA9"
+    }
+  ]
 }

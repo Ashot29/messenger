@@ -13,7 +13,7 @@ interface IAuth {
   loading: boolean;
 }
 
-export const authReducer = (state: IAuth = initialState, action) => {
+export const authReducer = (state: IAuth = initialState, action: any) => {
   switch (action.type) {
     case AUTH_LOADING_START:
       return {

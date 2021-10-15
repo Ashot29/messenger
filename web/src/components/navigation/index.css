@@ -8,12 +8,12 @@
     color: #FFF;
     font-size: 1.2rem;
     cursor: pointer;
+    margin-left: 20px;
 }
 
 #nav-mobile {
     width: 11%;
     display: flex;
-    justify-content: space-between;
     list-style: none;
 }
 
