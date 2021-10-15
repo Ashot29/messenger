@@ -14,7 +14,6 @@ const theme = createTheme({
 });
 
 const useStyles = makeStyles({
-  // hook useStyles
   button: {
     width: "100%",
     height: "100%",
