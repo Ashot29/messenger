@@ -10,23 +10,23 @@ import "./App.css";
 const socket = io("http://localhost:4000");
 
 function App(): JSX.Element {
-  const [isAuth, setIsAuth] = useState(false)
+  const [isAuth, setIsAuth] = useState(false);
 
   return (
     <>
       <Navigation />
       <Switch>
         <Route exact path="/">
-          {!isAuth ? <Redirect to='/login' /> : <Redirect to='/dashboard' />}
+          {!isAuth ? <Redirect to="/login" /> : <Redirect to="/dashboard" />}
         </Route>
         <Route exact path="/dashboard">
-          <Dashboard />
+          {!isAuth ? <Redirect to="/login" /> : <Dashboard />}
         </Route>
         <Route path="/login">
-          <Login />
+          {!isAuth ? <Login /> : <Redirect to="/dashboard" />}
         </Route>
         <Route path="/register">
-          <Register />
+        {!isAuth ? <Register /> : <Redirect to="/dashboard" />}
         </Route>
       </Switch>
     </>
