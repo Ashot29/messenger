@@ -1,5 +1,4 @@
-import { AUTH_LOADING_START } from './../actionTypes/authActionTypes';
-import { AUTH_LOADING_END } from '../actionTypes/authActionTypes';
+import { AUTH_LOADING_END_SUCCESS, AUTH_LOADING_START, AUTH_LOADING_END_FAILURE } from './../actionTypes/authActionTypes';
 
 export const authLoadingStart = () => {
     return {
@@ -7,8 +6,19 @@ export const authLoadingStart = () => {
     }
 }
 
-export const authLoadingEnd = () => {
+type Token = {
+    token: string
+}
+
+export const authLoadingEndSuccess = (token: Token) => {
     return {
-        type:  AUTH_LOADING_END
+        type:  AUTH_LOADING_END_SUCCESS,
+        payload: token
+    }
+}
+
+export const authLoadingEndFailure = () => {
+    return {
+        type:  AUTH_LOADING_END_FAILURE,
     }
 }

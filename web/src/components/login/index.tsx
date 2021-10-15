@@ -9,7 +9,11 @@ import { Link } from "react-router-dom";
 import LockIcon from "@mui/icons-material/Lock";
 import { usersService } from "../../services/users.service";
 import "./index.css";
-import { authLoadingStart } from "./../../stateManagement/actions/actionCreators/authActionCreator";
+import {
+  authLoadingEndFailure,
+  authLoadingEndSuccess,
+  authLoadingStart,
+} from "./../../stateManagement/actions/actionCreators/authActionCreator";
 import { useDispatch } from "react-redux";
 
 const theme = createTheme({
@@ -40,18 +44,12 @@ const Login = () => {
 
   function authorizingUser(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    usersService
-      .checkEmail(loginUser.email)
-      // loading auth
-      .then((data: any) => {
-        dispatch(authLoadingStart());
-        if (data.length > 0 && data[0].password === loginUser.password) {
-          
-          console.log('User is authed.')
-        } else {
-          console.log("Either email or password i incorrect");
-        }
-      });
+    usersService.checkEmail(loginUser.email).then((data: any) => {
+      dispatch(authLoadingStart());
+      data.length > 0 && data[0].password === loginUser.password
+        ? dispatch(authLoadingEndSuccess({ token: data[0].id }))
+        : dispatch(authLoadingEndFailure());
+    });
     updateLoginUser({
       email: "",
       password: "",
