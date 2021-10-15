@@ -8,8 +8,8 @@ import { createTheme, ThemeProvider } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import LockIcon from "@mui/icons-material/Lock";
-import { USER_URL } from './../../constants/url';
 import "./index.css";
+import { usersService, IUser } from "./../../services/users.service";
 
 const theme = createTheme({
   palette: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 
 const Register = () => {
   const classes = useStyles();
-  const [registeringUser, updateRegisteringUser] = useState({
+  const [registeringUser, updateRegisteringUser] = useState<IUser>({
     userName: "",
     email: "",
     password: "",
@@ -44,37 +44,34 @@ const Register = () => {
     }));
   }
 
+  function registeringNewUser(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    usersService.post(registeringUser);
+    updateRegisteringUser({
+      userName: "",
+      email: "",
+      password: "",
+    });
+  }
+
   return (
     <div className="login-form-wrapper">
       <div className="login-form">
         <h2>Register</h2>
-        <form
-          id="register"
-          onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            fetch(`${USER_URL}/users`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(registeringUser),
-            })
-            updateRegisteringUser({
-              userName: "",
-              email: "",
-              password: "",
-            });
-          }}
-        >
+        <form id="register" onSubmit={registeringNewUser}>
           <ThemeProvider theme={theme}>
             <Box
               sx={{ display: "flex", alignItems: "flex-end", margin: "12px 0" }}
             >
               <AlternateEmailIcon sx={{ color: "#7B1FA2", mr: 1, my: 0.5 }} />
               <TextField
+                required
                 value={registeringUser.email}
                 name="email"
                 label="Enter an Email"
+                inputProps={{
+                  pattern: "[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$",
+                }}
                 fullWidth
                 variant="standard"
                 color="primary"
@@ -87,6 +84,7 @@ const Register = () => {
             >
               <AccountCircle sx={{ color: "#7B1FA2", mr: 1, my: 0.5 }} />
               <TextField
+                required
                 value={registeringUser.userName}
                 name="userName"
                 label="Create a UserName"
@@ -102,6 +100,7 @@ const Register = () => {
             >
               <LockIcon sx={{ color: "#7B1FA2", mr: 1, my: 0.5 }} />
               <TextField
+                required
                 value={registeringUser.password}
                 name="password"
                 label="Create a Password"
