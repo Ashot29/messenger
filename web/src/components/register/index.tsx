@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import LockIcon from "@mui/icons-material/Lock";
 import "./index.css";
 import { usersService, IUser } from "./../../services/users.service";
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router";
 
 const theme = createTheme({
   palette: {
