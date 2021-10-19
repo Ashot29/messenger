@@ -1,0 +1,55 @@
+.login-form-wrapper {
+    width: 100%;
+    height: 91.7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e5bcf7;
+}
+
+#login {
+    width: 500px
+}
+
+#register {
+    width: 500px
+}
+
+.login-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #FFF;
+    border-radius: 23px;
+    padding: 35px 50px;
+}
+
+.login-form > h2 {
+    display: flex;
+    justify-content: center;
+    color: #7B1FA2;
+    font-size: 2.5rem;
+    margin: 10px 0;
+    padding: 0;
+}
+
+.login-or {
+    display: flex;
+    justify-content: center;
+    color: #7B1FA2;
+}
+
+.login-or-register {
+    display: flex;
+    justify-content: center;
+}
+
+.login-or-register-button {
+    font-size: 1.5rem;
+    color: #7B1FA2;
+    cursor: pointer;
+}
+
+.login-or-register-button:hover {
+    text-decoration: underline #7B1FA2;
+}

@@ -10,7 +10,7 @@ interface UserListItemProps {
 const UserListItem = ({user}: UserListItemProps) => {
     return (
         <li className='user-list-item'>
-            <Avatar sx={{ width: 40, height: 40, fontSize: 30, backgroundColor: '#ae3fdd' }}>{user.userName[0]}</Avatar>
+            <Avatar sx={{ width: 40, height: 40, fontSize: 30, backgroundColor: '#ae3fdd' }}>{user.userName[0].toUpperCase()}</Avatar>
             <span className='user-username'>{user.userName}</span>
         </li>
     )

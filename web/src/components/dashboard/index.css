@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: row;
     width: 80%;
-    min-height: 75vh;
+    height: 75vh;
     margin: 0 auto;
 }
 
@@ -26,13 +26,15 @@
     display: flex;
     flex-direction: column;
     width: 69%;
+    height: 100%;
 }
 
 .dashboard-chat {
-    height: 90%;
+    height: 100%;
     border-radius: 20px;
     padding: 20px;
     background-color: #FFF;
+    overflow-y: scroll;
 }
 
 .dashboard-chat-input-send {

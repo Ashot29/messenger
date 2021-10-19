@@ -7,7 +7,8 @@ import { createTheme, ThemeProvider } from "@material-ui/core";
 import "./index.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../stateManagement/reducers/rootReducer";
-import UserListItem from './userListItem/index';
+import UserListItem from "./userListItem/index";
+import Chat from "./chat";
 
 const socket = io("http://localhost:4000");
 
@@ -36,7 +37,6 @@ interface IUser {
 }
 
 const Dashboard: React.FC = () => {
-  const classes = useStyles();
   const currentUser = useSelector((state: RootState) => {
     return {
       userName: state.auth.userName,
@@ -44,10 +44,8 @@ const Dashboard: React.FC = () => {
       id: state.auth.id,
     };
   });
-  const userName = useSelector((state: RootState) => state.auth.userName)
   const [users, setUsers] = useState<IUser[]>([]);
-  const [currentMessage, setCurrentMessage] = useState("");
-  const [room, setRoom] = useState("");
+  const [conversation, setConversation] = useState("");
   const [messages, updateMessages] = useState<any[]>([]);
 
   useEffect(() => {
@@ -56,31 +54,15 @@ const Dashboard: React.FC = () => {
       .then((data) => setUsers([...data]));
   }, []);
 
-  const sendMessage = async () => {
-    if (currentMessage !== "") {
-      const messageData = {
-        room,
-        userName,
-        message: currentMessage,
-        time:
-          new Date(Date.now()).getHours() +
-          ":" +
-          new Date(Date.now()).getMinutes(),
-      };
-
-      await socket.emit("send_message", messageData);
-      updateMessages((prev) => [...prev, messageData]);
-    }
-  };
-
-  const joinRoom = () => {
-    if (room !== "") {
-      socket.emit("join_room", room);
+  const enterConversation = () => {
+    if (conversation !== "") {
+      socket.emit("enter_conversation", conversation);
     }
   };
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
+      console.log(data, 'data')
       updateMessages((prev) => [...prev, data]);
     });
   }, [socket]);
@@ -91,59 +73,33 @@ const Dashboard: React.FC = () => {
         <div className="dashboard-content">
           <div className="dashboard-users">
             <ul className="users-list">
-              {users.map(user => {
-                return <UserListItem key={user.id} user={user}/>
+              {users.map((user) => {
+                return <UserListItem key={user.id} user={user} />;
               })}
             </ul>
           </div>
           <div className="dashboard-chat-content">
-            <div className="dashboard-chat">
-              {messages.map((messageData, index) => {
-                return <h1 key={index}>{messageData.message}</h1>;
-              })}
-            </div>
-            <div className="dashboard-chat-input-send">
-              <div className="dashboard-input">
-                <input
-                  className="message-box"
-                  type="text"
-                  placeholder="Type a message..."
-                  value={currentMessage}
-                  onChange={(event) => setCurrentMessage(event.target.value)}
-                  onKeyPress={(event) => {
-                    event.key === "Enter" && sendMessage();
-                  }}
-                />
-              </div>
-              <div className="dashboard-input-send-button">
-                <ThemeProvider theme={theme}>
-                  <Button
-                    variant="contained"
-                    className={classes.button}
-                    size="large"
-                    color="primary"
-                    onClick={sendMessage}
-                  >
-                    <SendIcon sx={{ color: "#FFF" }} />
-                  </Button>
-                </ThemeProvider>
-              </div>
-            </div>
+            <Chat
+              messages={messages}
+              socket={socket}
+              updateMessages={updateMessages}
+              conversation={conversation}
+            />
           </div>
         </div>
         <div className="username-roomname">
           <input
             type="text"
             placeholder="Type room name"
-            value={room}
-            onChange={(event) => setRoom(event.target.value)}
+            value={conversation}
+            onChange={(event) => setConversation(event.target.value)}
           />
           <ThemeProvider theme={theme}>
             <Button
               variant="contained"
               size="large"
               color="primary"
-              onClick={joinRoom}
+              onClick={enterConversation}
             >
               Enter Room
             </Button>

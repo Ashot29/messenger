@@ -9,19 +9,14 @@ const io = require("socket.io")(http, {
 io.on("connection", function (socket) {
   console.log(socket.id, "socket.id");
 
-  socket.on("join_room", (data) => {
+  socket.on("enter_conversation", (data) => {
     socket.join(data);
-    console.log(`User ID: ${socket.id} joined room ${data}`);
+    console.log(`User ID: ${socket.id} joined conversation ${data}`);
   });
-
-  // socket.on("enter_conversation", (data) => {
-  //   socket.join(data);
-  //   console.log(`User ID: ${socket.id} joined conversation ${data}`);
-  // });
 
   socket.on("send_message", (data) => {
     console.log(data, 'data');
-    socket.to(data.room).emit('receive_message', data)
+    socket.to(data.conversation).emit('receive_message', data)
   });
 
   socket.on("disconnect", () => {

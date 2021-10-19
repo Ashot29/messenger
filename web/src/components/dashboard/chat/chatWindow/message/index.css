@@ -1,0 +1,27 @@
+.own-message {
+    margin-top: 5px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.message {
+    margin-top: 5px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.own-message-content {
+    padding: 12px 24px 12px 12px;
+    background-color: #ae3fdd;
+    border-radius: 12px;
+    color: white;
+    font-size: 20px;
+}
+
+.message-content {
+    padding: 12px 24px 12px 12px;
+    background-color: #d786fa;
+    border-radius: 12px;
+    color: white;
+    font-size: 20px;
+}
