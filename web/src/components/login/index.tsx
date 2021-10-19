@@ -25,7 +25,6 @@ const theme = createTheme({
 });
 
 const useStyles = makeStyles({
-  // hook useStyles
   field: {
     borderColor: "#7B1FA2",
   },
@@ -45,9 +44,17 @@ const Login = () => {
   function authorizingUser(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     usersService.checkEmail(loginUser.email).then((data: any) => {
+      console.log(data)
+      const user = data[0];
+      const userData = {
+        userName: user.userName,
+        id: user.id,
+        token: user.id,
+        email: user.email
+      }
       dispatch(authLoadingStart());
       data.length > 0 && data[0].password === loginUser.password
-        ? dispatch(authLoadingEndSuccess({ token: data[0].id }))
+        ? dispatch(authLoadingEndSuccess(userData))
         : dispatch(authLoadingEndFailure());
     });
     updateLoginUser({

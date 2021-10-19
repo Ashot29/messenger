@@ -14,6 +14,11 @@ io.on("connection", function (socket) {
     console.log(`User ID: ${socket.id} joined room ${data}`);
   });
 
+  // socket.on("enter_conversation", (data) => {
+  //   socket.join(data);
+  //   console.log(`User ID: ${socket.id} joined conversation ${data}`);
+  // });
+
   socket.on("send_message", (data) => {
     console.log(data, 'data');
     socket.to(data.room).emit('receive_message', data)

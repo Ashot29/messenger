@@ -5,6 +5,9 @@ import SendIcon from "@mui/icons-material/Send";
 import { makeStyles } from "@material-ui/core";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import "./index.css";
+import { useSelector } from "react-redux";
+import { RootState } from "../../stateManagement/reducers/rootReducer";
+import UserListItem from './userListItem/index';
 
 const socket = io("http://localhost:4000");
 
@@ -25,60 +28,62 @@ const useStyles = makeStyles({
 });
 
 interface IUser {
-  userName: string
-  email: string
-  password: string
-  created_at: number
-  id: string
+  userName: string;
+  email: string;
+  password: string;
+  created_at: number;
+  id: string;
 }
 
 const Dashboard: React.FC = () => {
   const classes = useStyles();
-  const [users, setUsers] = useState<IUser[]>([]) 
-  const [username, setUsername] = useState('');
+  const currentUser = useSelector((state: RootState) => {
+    return {
+      userName: state.auth.userName,
+      email: state.auth.email,
+      id: state.auth.id,
+    };
+  });
+  const userName = useSelector((state: RootState) => state.auth.userName)
+  const [users, setUsers] = useState<IUser[]>([]);
   const [currentMessage, setCurrentMessage] = useState("");
   const [room, setRoom] = useState("");
   const [messages, updateMessages] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/users?email_ne=${'ashot20012001@gmail.com'}`)
-    .then(resp => resp.json())
-    .then(data => setUsers([...data]))
-  }, [])
-
-  console.log(users);
+    fetch(`http://localhost:8080/users?id_ne=${currentUser.id}`)
+      .then((resp) => resp.json())
+      .then((data) => setUsers([...data]));
+  }, []);
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
-        room, 
-        username,
+        room,
+        userName,
         message: currentMessage,
-        time: new Date(Date.now()).getHours() + ':' + new Date(Date.now()).getMinutes(),
+        time:
+          new Date(Date.now()).getHours() +
+          ":" +
+          new Date(Date.now()).getMinutes(),
       };
 
-      await socket.emit('send_message', messageData)
-      updateMessages(prev => ([
-        ...prev,
-        messageData
-      ]))
+      await socket.emit("send_message", messageData);
+      updateMessages((prev) => [...prev, messageData]);
     }
   };
 
   const joinRoom = () => {
-    if (username !== '' && room !== '') {
-      socket.emit('join_room', room)
+    if (room !== "") {
+      socket.emit("join_room", room);
     }
   };
 
   useEffect(() => {
-    socket.on('receive_message', (data) => {
-      updateMessages(prev => ([
-        ...prev,
-        data
-      ]))
-    })
-  }, [socket])
+    socket.on("receive_message", (data) => {
+      updateMessages((prev) => [...prev, data]);
+    });
+  }, [socket]);
 
   return (
     <>
@@ -86,18 +91,16 @@ const Dashboard: React.FC = () => {
         <div className="dashboard-content">
           <div className="dashboard-users">
             <ul className="users-list">
-              {users.map((user, index) => {
-                return <li key={index}>{user.userName}</li>
+              {users.map(user => {
+                return <UserListItem key={user.id} user={user}/>
               })}
             </ul>
           </div>
           <div className="dashboard-chat-content">
             <div className="dashboard-chat">
-              {
-                messages.map((messageData, index) => {
-                  return <h1 key={index}>{messageData.message}</h1>
-                })
-              }
+              {messages.map((messageData, index) => {
+                return <h1 key={index}>{messageData.message}</h1>;
+              })}
             </div>
             <div className="dashboard-chat-input-send">
               <div className="dashboard-input">
@@ -108,7 +111,7 @@ const Dashboard: React.FC = () => {
                   value={currentMessage}
                   onChange={(event) => setCurrentMessage(event.target.value)}
                   onKeyPress={(event) => {
-                    event.key === 'Enter' && sendMessage()
+                    event.key === "Enter" && sendMessage();
                   }}
                 />
               </div>
@@ -128,13 +131,7 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className='username-roomname'>
-          <input
-            type="text"
-            placeholder="Type username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
+        <div className="username-roomname">
           <input
             type="text"
             placeholder="Type room name"

@@ -5,6 +5,8 @@ export interface IUser {
     userName: string
     password: string
     email: string
+    created_at?: number
+    id?: string
 }
 
 export const usersService = new BaseService('users', USER_URL);

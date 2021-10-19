@@ -19,6 +19,7 @@
     margin-right: 12px;
     border-radius: 20px;
     background-color: #FFF;
+    padding: 12px;
 }
 
 .dashboard-chat-content {
@@ -69,4 +70,5 @@
 
 .users-list {
     list-style: none;
+    padding: 12px;
 }

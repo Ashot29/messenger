@@ -1,0 +1,19 @@
+.user-list-item {
+    margin-bottom: 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(242, 239, 243);
+    padding: 12px;
+    cursor: pointer;
+}
+
+.user-list-item:hover {
+    background-color: rgb(240, 144, 253);
+}
+
+.user-username {
+    font-size: 24px;
+    margin-left: 12px;
+}
