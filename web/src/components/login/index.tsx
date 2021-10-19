@@ -44,7 +44,6 @@ const Login = () => {
   function authorizingUser(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     usersService.checkEmail(loginUser.email).then((data: any) => {
-      console.log(data)
       const user = data[0];
       const userData = {
         userName: user.userName,

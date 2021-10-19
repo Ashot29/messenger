@@ -2,6 +2,7 @@ import {
   AUTH_LOADING_START,
   AUTH_LOADING_END_SUCCESS,
   AUTH_LOADING_END_FAILURE,
+  AUTH_LOGOUT
 } from "./../actions/actionTypes/authActionTypes";
 
 const initialState = {
@@ -45,6 +46,16 @@ export const authReducer = (state: IAuth = initialState, action: any) => {
         loading: false,
         token: "",
         isAuth: false,
+        id: "",
+        userName: "",
+        email: "",
+      };
+    case AUTH_LOGOUT:
+      return {
+        ...state,
+        token: "",
+        isAuth: false,
+        loading: false,
         id: "",
         userName: "",
         email: "",
