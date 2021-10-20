@@ -13,6 +13,8 @@ import { useDispatch } from "react-redux";
 import { setAllUsers } from './../../stateManagement/actions/actionCreators/usersActionCreator';
 import { IUser } from './../../services/users.service';
 import "./index.css";
+import { setUserInitialThreads } from './../../stateManagement/actions/actionCreators/userThreadsActionCreator';
+import { userThreadsReducer } from './../../stateManagement/reducers/userThreadsState';
 
 const socket = io("http://localhost:4000");
 
@@ -35,7 +37,7 @@ const Dashboard: React.FC = () => {
   });
   const users = useSelector((state: RootState) => state.usersState.users)
   const [thread, setThread] = useState("");
-  const [threads, setThreads] = useState<IThread[]>([]);
+  const threads = useSelector((state: RootState) => state.userThreads.threads)
   const [messages, updateMessages] = useState<any[]>([]);
 
   useEffect(() => {
@@ -64,7 +66,9 @@ const Dashboard: React.FC = () => {
     if (!threadsService.getUserThreads) return;
     threadsService
       .getUserThreads(currentUser.id)
-      .then((data) => setThreads(data));
+      .then((data) => {
+        dispatch(setUserInitialThreads(data))
+      });
   }, []);
 
   return (
@@ -74,7 +78,7 @@ const Dashboard: React.FC = () => {
           <div className="dashboard-threads">
             <h1 className="dashboard-threads-header">Threads</h1>
             <div className="dashboard-threads-wrapper">
-              {threads.map((thread) => {
+              {threads.map((thread: IThread) => {
                 return (
                   <Thread key={thread.id} thread={thread}/>
                 );
