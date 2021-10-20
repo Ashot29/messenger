@@ -5,4 +5,11 @@
 .thread {
   padding: 12px;
   cursor: pointer;
+  background-color: #ae3fdd;
+  border-radius: 12px;
+  color: #fff;
+}
+
+.thread:hover {
+    background-color: rgb(240, 144, 253);
 }

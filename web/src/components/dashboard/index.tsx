@@ -34,7 +34,6 @@ const Dashboard: React.FC = () => {
     };
   });
   const users = useSelector((state: RootState) => state.usersState.users)
-  // const [users, setUsers] = useState<IUser[]>([]);
   const [thread, setThread] = useState("");
   const [threads, setThreads] = useState<IThread[]>([]);
   const [messages, updateMessages] = useState<any[]>([]);
@@ -45,7 +44,6 @@ const Dashboard: React.FC = () => {
       .getAllUsersExceptOwner(currentUser.id)
       .then((data) => {
         dispatch(setAllUsers(data))
-        // setUsers([...data])
       });
   }, []);
 

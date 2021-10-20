@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../stateManagement/reducers/rootReducer";
 import { authLogout } from "../../stateManagement/actions/actionCreators/authActionCreator";
 import { useDispatch } from "react-redux";
+import { resetInitialUserState } from "../../stateManagement/actions/actionCreators/usersActionCreator";
 
 const Navigation: React.FC = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const Navigation: React.FC = () => {
 
   const logout = () => {
     dispatch(authLogout());
+    dispatch(resetInitialUserState())
   };
 
   const navLink = !isAuth ? (
