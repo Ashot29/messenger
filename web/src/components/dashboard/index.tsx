@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import Button from "@material-ui/core/Button";
-import SendIcon from "@mui/icons-material/Send";
 import { makeStyles } from "@material-ui/core";
 import { createTheme, ThemeProvider } from "@material-ui/core";
-import "./index.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../stateManagement/reducers/rootReducer";
 import UserListItem from "./userListItem/index";
 import Chat from "./chat";
+import { usersService } from "../../services/users.service";
+import "./index.css";
 
 const socket = io("http://localhost:4000");
 
@@ -45,61 +45,67 @@ const Dashboard: React.FC = () => {
     };
   });
   const [users, setUsers] = useState<IUser[]>([]);
-  const [conversation, setConversation] = useState("");
+  const [thread, setThread] = useState("");
   const [messages, updateMessages] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/users?id_ne=${currentUser.id}`)
-      .then((resp) => resp.json())
+    if (!usersService.getAllUsersExceptOwner) return;
+    usersService
+      .getAllUsersExceptOwner(currentUser.id)
       .then((data) => setUsers([...data]));
   }, []);
 
-  const enterConversation = () => {
-    if (conversation !== "") {
-      socket.emit("enter_conversation", conversation);
+  const enterThread = () => {
+    if (thread !== "") {
+      socket.emit("enter_thread", thread);
     }
   };
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
-      console.log(data, 'data')
+      console.log(data, "data");
       updateMessages((prev) => [...prev, data]);
     });
+    console.log(socket);
   }, [socket]);
 
   return (
     <>
       <div className="dashboard-content-wrapper">
         <div className="dashboard-content">
-          <div className="dashboard-users">
-            <ul className="users-list">
-              {users.map((user) => {
-                return <UserListItem key={user.id} user={user} />;
-              })}
-            </ul>
+          <div className="dashboard-threads">
+            <h1 className="dashboard-threads-header">Threads</h1>
           </div>
           <div className="dashboard-chat-content">
             <Chat
               messages={messages}
               socket={socket}
               updateMessages={updateMessages}
-              conversation={conversation}
+              thread={thread}
             />
+          </div>
+          <div className="dashboard-users">
+            <h1 className="dashboard-users-header">Users</h1>
+            <ul className="users-list">
+              {users.map((user) => {
+                return <UserListItem key={user.id} user={user} />;
+              })}
+            </ul>
           </div>
         </div>
         <div className="username-roomname">
           <input
             type="text"
             placeholder="Type room name"
-            value={conversation}
-            onChange={(event) => setConversation(event.target.value)}
+            value={thread}
+            onChange={(event) => setThread(event.target.value)}
           />
           <ThemeProvider theme={theme}>
             <Button
               variant="contained"
               size="large"
               color="primary"
-              onClick={enterConversation}
+              onClick={enterThread}
             >
               Enter Room
             </Button>

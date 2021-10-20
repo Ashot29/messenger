@@ -4,16 +4,20 @@ import ChatInput from "./chatInputs/index";
 
 interface ChatProps {
   messages: any[];
-  socket: any
-  updateMessages: any
-  conversation: string
+  socket: any;
+  updateMessages: any;
+  thread: string;
 }
 
-const Chat = ({ messages, socket, updateMessages, conversation }: ChatProps) => {
+const Chat = ({ messages, socket, updateMessages, thread }: ChatProps) => {
   return (
     <>
       <ChatWindow messages={messages} />
-      <ChatInput socket={socket} updateMessages={updateMessages} conversation={conversation} />
+      <ChatInput
+        socket={socket}
+        updateMessages={updateMessages}
+        thread={thread}
+      />
     </>
   );
 };

@@ -23,21 +23,20 @@ const useStyles = makeStyles({
 });
 
 interface ChatInputProps {
-    updateMessages: any
-    socket: any;
-    conversation: string
+  updateMessages: any;
+  socket: any;
+  thread: string;
 }
 
-const ChatInput = ({ updateMessages, socket, conversation }: ChatInputProps) => {
+const ChatInput = ({ updateMessages, socket, thread }: ChatInputProps) => {
   const classes = useStyles();
   const [currentMessage, setCurrentMessage] = useState("");
-  const userName = useSelector((state: RootState) => state.auth.userName)
-
+  const userName = useSelector((state: RootState) => state.auth.userName);
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
-        conversation,
+        thread,
         userName,
         message: currentMessage,
         time:
@@ -59,11 +58,11 @@ const ChatInput = ({ updateMessages, socket, conversation }: ChatInputProps) => 
           className="message-box"
           type="text"
           placeholder="Type a message..."
-            value={currentMessage}
-            onChange={(event) => setCurrentMessage(event.target.value)}
-            onKeyPress={(event) => {
-              event.key === "Enter" && sendMessage();
-            }}
+          value={currentMessage}
+          onChange={(event) => setCurrentMessage(event.target.value)}
+          onKeyPress={(event) => {
+            event.key === "Enter" && sendMessage();
+          }}
         />
       </div>
       <div className="dashboard-input-send-button">

@@ -43,7 +43,8 @@ const Login = () => {
 
   function authorizingUser(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    usersService.checkEmail(loginUser.email).then((data: any) => {
+    usersService.checkEmail(loginUser.email)
+    .then((data: any) => {
       const user = data[0];
       const userData = {
         userName: user.userName,
@@ -52,7 +53,7 @@ const Login = () => {
         email: user.email
       }
       dispatch(authLoadingStart());
-      data.length > 0 && data[0].password === loginUser.password
+      data.length > 0 && user.password === loginUser.password
         ? dispatch(authLoadingEndSuccess(userData))
         : dispatch(authLoadingEndFailure());
     });

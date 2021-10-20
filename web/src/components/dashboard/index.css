@@ -9,23 +9,31 @@
 .dashboard-content {
     display: flex;
     flex-direction: row;
-    width: 80%;
+    /* width: 1300px; */
     height: 75vh;
     margin: 0 auto;
 }
 
 .dashboard-users {
-    width: 29%;
-    margin-right: 12px;
+    width: 300px;
+    margin-left: 12px;
     border-radius: 20px;
     background-color: #FFF;
     padding: 12px;
 }
 
+.dashboard-threads-header {
+    padding-left: 12px;
+}
+
+.dashboard-users-header {
+    padding-left: 12px;
+}
+
 .dashboard-chat-content {
     display: flex;
     flex-direction: column;
-    width: 69%;
+    width: 750px;
     height: 100%;
 }
 
@@ -35,6 +43,14 @@
     padding: 20px;
     background-color: #FFF;
     overflow-y: scroll;
+}
+
+.dashboard-threads {
+    border-radius: 20px;
+    width: 300px;
+    padding: 12px;
+    background-color: #FFF;
+    margin-right: 12px;
 }
 
 .dashboard-chat-input-send {

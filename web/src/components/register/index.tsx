@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import LockIcon from "@mui/icons-material/Lock";
 import "./index.css";
-import { usersService, IUser } from "./../../services/users.service";
+import { IUser } from "./../../services/users.service";
 import { useHistory } from "react-router";
 
 const theme = createTheme({
@@ -48,7 +48,13 @@ const Register = () => {
 
   function registeringNewUser(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    usersService.post(registeringUser);
+    fetch(`http://localhost:8080/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(registeringUser),
+    }).then((resp) => resp.json());
     updateRegisteringUser({
       userName: "",
       email: "",
