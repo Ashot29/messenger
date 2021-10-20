@@ -1,7 +1,8 @@
 import { IThread } from "./../../../services/threads.service";
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../stateManagement/reducers/rootReducer'
-import { useEffect } from 'react';
+import { RootState } from "../../../stateManagement/reducers/rootReducer";
+import { useSelector } from "react-redux";
+import { IUser } from "./../../../services/users.service";
+import './index.css'
 
 interface ThreadProps {
   thread: IThread;
@@ -15,14 +16,26 @@ const Thread = ({ thread }: ThreadProps) => {
       id: state.auth.id,
     };
   });
-
-  useEffect(() => {
-    thread.members.find(id => id !== currentUser.id)
-  }, [])
+  const threadMembers = useSelector((state: RootState) => {
+    const threadMembersarray: IUser[] = [];
+    thread.members.forEach((id: string) => {
+      if (id !== currentUser.id) {
+        let user = state.usersState.users.find(
+          (user: IUser) => user?.id === id
+        );
+        threadMembersarray.push(user);
+      }
+    });
+    return threadMembersarray;
+  });
 
   return (
     <div key={thread.id} className="thread">
-      {thread.id}
+      <div className="thread-members-names">
+        {threadMembers.map((threadMember: IUser) => {
+          return <span className='thread-member-name' key={threadMember?.id}>{threadMember?.userName}</span>;
+        })}
+      </div>
     </div>
   );
 };
