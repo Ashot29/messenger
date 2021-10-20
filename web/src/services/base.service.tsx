@@ -3,6 +3,7 @@ export class BaseService {
   url: string;
   checkEmail?: any;
   getAllUsersExceptOwner?: (currentUserId: string) => Promise<any>;
+  getUserThreads?: (userId: any) => Promise<any>;
 
   constructor(prefix: string, url: string) {
     this.url = url;

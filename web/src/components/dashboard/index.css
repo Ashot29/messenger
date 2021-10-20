@@ -23,11 +23,13 @@
 }
 
 .dashboard-threads-header {
-    padding-left: 12px;
+    color: #7B1FA2;
+    text-align: center;
 }
 
 .dashboard-users-header {
-    padding-left: 12px;
+    color: #7B1FA2;
+    text-align: center;
 }
 
 .dashboard-chat-content {
@@ -37,12 +39,19 @@
     height: 100%;
 }
 
+.thread {
+    padding: 12px;
+    background-color: #ae3fdd;
+    border-radius: 12px;
+    color: #FFF;
+}
+
 .dashboard-chat {
     height: 100%;
     border-radius: 20px;
     padding: 20px;
     background-color: #FFF;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 
 .dashboard-threads {

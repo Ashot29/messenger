@@ -1,0 +1,25 @@
+{
+  "threads": [
+      {
+        "id": "3f6t-Qs",
+        "members": [
+            "u1Jt-qW",
+            "UfvU9mD"
+        ],
+        "messages": [
+            "Fe2-hQ8"
+        ]
+      }
+  ],
+  "messages": [
+      {
+        "id": "Fe2-hQ8",
+        "senderId": "u1Jt-qW",
+        "threadId": "3f6t-Qs",
+        "text": "Hello"
+      }
+  ]
+}
+
+
+
