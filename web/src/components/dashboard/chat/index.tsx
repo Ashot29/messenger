@@ -6,17 +6,15 @@ interface ChatProps {
   messages: any[];
   socket: any;
   updateMessages: any;
-  thread: string;
 }
 
-const Chat = ({ messages, socket, updateMessages, thread }: ChatProps) => {
+const Chat = ({ messages, socket, updateMessages }: ChatProps) => {
   return (
     <>
       <ChatWindow messages={messages} />
       <ChatInput
         socket={socket}
         updateMessages={updateMessages}
-        thread={thread}
       />
     </>
   );

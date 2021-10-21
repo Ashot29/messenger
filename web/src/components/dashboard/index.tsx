@@ -8,15 +8,14 @@ import UserListItem from "./userListItem/index";
 import Chat from "./chat";
 import { usersService } from "../../services/users.service";
 import { IThread, threadsService } from "./../../services/threads.service";
-import Thread from './thread';
+import Thread from "./thread";
 import { useDispatch } from "react-redux";
-import { setAllUsers } from './../../stateManagement/actions/actionCreators/usersActionCreator';
-import { IUser } from './../../services/users.service';
+import { setAllUsers } from "./../../stateManagement/actions/actionCreators/usersActionCreator";
+import { IUser } from "./../../services/users.service";
+import { setUserInitialThreads } from "./../../stateManagement/actions/actionCreators/userThreadsActionCreator";
 import "./index.css";
-import { setUserInitialThreads } from './../../stateManagement/actions/actionCreators/userThreadsActionCreator';
-import { userThreadsReducer } from './../../stateManagement/reducers/userThreadsState';
 
-const socket = io("http://localhost:4000");
+export const socket = io("http://localhost:4000");
 
 const theme = createTheme({
   palette: {
@@ -35,25 +34,16 @@ const Dashboard: React.FC = () => {
       id: state.auth.id,
     };
   });
-  const users = useSelector((state: RootState) => state.usersState.users)
-  const [thread, setThread] = useState("");
-  const threads = useSelector((state: RootState) => state.userThreads.threads)
+  const users = useSelector((state: RootState) => state.usersState.users);
+  const threads = useSelector((state: RootState) => state.userThreads.threads);
   const [messages, updateMessages] = useState<any[]>([]);
 
   useEffect(() => {
     if (!usersService.getAllUsersExceptOwner) return;
-    usersService
-      .getAllUsersExceptOwner(currentUser.id)
-      .then((data) => {
-        dispatch(setAllUsers(data))
-      });
+    usersService.getAllUsersExceptOwner(currentUser.id).then((data) => {
+      dispatch(setAllUsers(data));
+    });
   }, []);
-
-  const enterThread = () => {
-    if (thread !== "") {
-      socket.emit("enter_thread", thread);
-    }
-  };
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
@@ -64,11 +54,9 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     if (!threadsService.getUserThreads) return;
-    threadsService
-      .getUserThreads(currentUser.id)
-      .then((data) => {
-        dispatch(setUserInitialThreads(data))
-      });
+    threadsService.getUserThreads(currentUser.id).then((data) => {
+      dispatch(setUserInitialThreads(data));
+    });
   }, []);
 
   return (
@@ -79,9 +67,7 @@ const Dashboard: React.FC = () => {
             <h1 className="dashboard-threads-header">Threads</h1>
             <div className="dashboard-threads-wrapper">
               {threads.map((thread: IThread) => {
-                return (
-                  <Thread key={thread.id} thread={thread}/>
-                );
+                return <Thread key={thread.id} thread={thread} />;
               })}
             </div>
           </div>
@@ -90,7 +76,6 @@ const Dashboard: React.FC = () => {
               messages={messages}
               socket={socket}
               updateMessages={updateMessages}
-              thread={thread}
             />
           </div>
           <div className="dashboard-users">
@@ -101,24 +86,6 @@ const Dashboard: React.FC = () => {
               })}
             </ul>
           </div>
-        </div>
-        <div className="username-roomname">
-          <input
-            type="text"
-            placeholder="Type room name"
-            value={thread}
-            onChange={(event) => setThread(event.target.value)}
-          />
-          <ThemeProvider theme={theme}>
-            <Button
-              variant="contained"
-              size="large"
-              color="primary"
-              onClick={enterThread}
-            >
-              Enter Room
-            </Button>
-          </ThemeProvider>
         </div>
       </div>
     </>

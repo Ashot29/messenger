@@ -25,18 +25,18 @@ const useStyles = makeStyles({
 interface ChatInputProps {
   updateMessages: any;
   socket: any;
-  thread: string;
 }
 
-const ChatInput = ({ updateMessages, socket, thread }: ChatInputProps) => {
+const ChatInput = ({ updateMessages, socket }: ChatInputProps) => {
   const classes = useStyles();
+  const currentThread = useSelector((state: RootState) => state.currentThread)
   const [currentMessage, setCurrentMessage] = useState("");
   const userName = useSelector((state: RootState) => state.auth.userName);
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
-        thread,
+        thread: currentThread.id,
         userName,
         message: currentMessage,
         time:

@@ -6,6 +6,8 @@ import { RootState } from "../../stateManagement/reducers/rootReducer";
 import { authLogout } from "../../stateManagement/actions/actionCreators/authActionCreator";
 import { useDispatch } from "react-redux";
 import { resetInitialUserState } from "../../stateManagement/actions/actionCreators/usersActionCreator";
+import { resetUserThreads } from "../../stateManagement/actions/actionCreators/userThreadsActionCreator";
+import { resetCurrentThread } from "../../stateManagement/actions/actionCreators/currentThreadActionCreator";
 
 const Navigation: React.FC = () => {
   const dispatch = useDispatch();
@@ -13,7 +15,9 @@ const Navigation: React.FC = () => {
 
   const logout = () => {
     dispatch(authLogout());
+    dispatch(resetCurrentThread())
     dispatch(resetInitialUserState())
+    dispatch(resetUserThreads())
   };
 
   const navLink = !isAuth ? (
