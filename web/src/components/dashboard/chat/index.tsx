@@ -13,7 +13,6 @@ const Chat = ({ messages, socket, updateMessages }: ChatProps) => {
     <>
       <ChatWindow messages={messages} />
       <ChatInput
-        socket={socket}
         updateMessages={updateMessages}
       />
     </>

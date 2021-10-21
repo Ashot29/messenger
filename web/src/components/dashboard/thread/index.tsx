@@ -3,8 +3,8 @@ import { RootState } from "../../../stateManagement/reducers/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { IUser } from "./../../../services/users.service";
 import { socket } from "..";
+import { setThreadAsCurrent } from "./../../../stateManagement/actions/actionCreators/currentThreadActionCreator";
 import "./index.css";
-import { setThreadAsCurrent } from './../../../stateManagement/actions/actionCreators/currentThreadActionCreator';
 
 interface ThreadProps {
   thread: IThread;
@@ -26,6 +26,7 @@ const Thread = ({ thread }: ThreadProps) => {
         let user = state.usersState.users.find(
           (user: IUser) => user?.id === id
         );
+        if (!user) return;
         threadMembersarray.push(user);
       }
     });
@@ -34,20 +35,31 @@ const Thread = ({ thread }: ThreadProps) => {
 
   const enterThread = (threadId: string) => {
     if (!threadId) return;
-    dispatch(setThreadAsCurrent(thread))
+    dispatch(setThreadAsCurrent(thread));
     socket.emit("enter_thread", threadId);
   };
 
   return (
-    <div key={thread.id} className="thread" onClick={() => enterThread(thread.id)}>
+    <div
+      key={thread.id}
+      className="thread"
+      onClick={() => {
+        console.log(thread)
+        enterThread(thread.id)
+      }}
+    >
       <div className="thread-members-names">
-        {threadMembers.map((threadMember: IUser) => {
-          return (
-            <span className="thread-member-name" key={threadMember.id}>
-              {threadMember?.userName}
-            </span>
-          );
-        })}
+        {!!threadMembers.length &&
+          threadMembers.map((threadMember: IUser) => {
+            return (
+              <div className='thread-content' key={threadMember.id}>
+                <span className="thread-header">Username:</span>
+                <span className="thread-member-name">
+                  {threadMember?.userName}
+                </span>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { SET_USER_INITIAL_THREADS, RESET_USER_THREADS } from "../actions/actionTypes/userThreadsTypes";
+import { SET_USER_INITIAL_THREADS, RESET_USER_THREADS, ADD_THREAD_TO_STORE } from "../actions/actionTypes/userThreadsTypes";
 
 const initialState = {
   threads: [],
@@ -14,6 +14,13 @@ export const userThreadsReducer = (state: any = initialState, action: any) => {
       case RESET_USER_THREADS:
         return {
           threads: []
+        }
+      case ADD_THREAD_TO_STORE:
+        return {
+          threads: [
+            ...state.threads,
+            action.payload
+          ]
         }
     default:
       return state;

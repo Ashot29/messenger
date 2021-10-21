@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../stateManagement/reducers/rootReducer";
+import { socket } from "../..";
 
 const theme = createTheme({
   palette: {
@@ -24,10 +25,9 @@ const useStyles = makeStyles({
 
 interface ChatInputProps {
   updateMessages: any;
-  socket: any;
 }
 
-const ChatInput = ({ updateMessages, socket }: ChatInputProps) => {
+const ChatInput = ({ updateMessages }: ChatInputProps) => {
   const classes = useStyles();
   const currentThread = useSelector((state: RootState) => state.currentThread)
   const [currentMessage, setCurrentMessage] = useState("");
