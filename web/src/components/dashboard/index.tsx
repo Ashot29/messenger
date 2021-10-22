@@ -31,7 +31,6 @@ const Dashboard: React.FC = () => {
       id: state.auth.id,
     };
   });
-  const currentThread = useSelector((state: RootState) => state.currentThread);
   const users = useSelector((state: RootState) => state.usersState.users);
   const threads = useSelector((state: RootState) => state.userThreads.threads);
 
@@ -43,7 +42,6 @@ const Dashboard: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    console.log("mtav");
     dispatch(messagesLoadStart());
     messagesService
       .get()
