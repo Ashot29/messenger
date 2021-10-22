@@ -41,6 +41,7 @@ const UserListItem = ({ user }: UserListItemProps) => {
       addNewThread(currentUserId, user.id);
     } else {
       console.log(212121212);
+      
       // join room
     }
   }

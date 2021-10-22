@@ -10,9 +10,7 @@ interface ChatProps {
 const ChatWindow = () => {
   const userId = useSelector((state: RootState) => state.auth.id);
   const currentThread = useSelector((state: RootState) => state.currentThread) 
-  const messages: any[] = useSelector((state: RootState) => {
-    return state.messages.messages.filter((message: IMessage) => message.threadId === currentThread.id)
-  })
+  const messages: IMessage[] = useSelector((state: RootState) => state.messages.messages.filter((message: IMessage) => message.threadId === currentThread.id))
 
   return (
     <div className="dashboard-chat">

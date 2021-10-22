@@ -16,7 +16,7 @@ io.on("connection", function (socket) {
 
   socket.on("send_message", (data) => {
     console.log(data, "data");
-    socket.to(data.thread).emit("receive_message", data);
+    socket.to(data.threadId).emit("receive_message", data);
   });
 
   socket.on("disconnect", () => {

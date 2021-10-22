@@ -11,9 +11,14 @@ import { useDispatch } from "react-redux";
 import { setAllUsers } from "./../../stateManagement/actions/actionCreators/usersActionCreator";
 import { IUser } from "./../../services/users.service";
 import { setUserInitialThreads } from "./../../stateManagement/actions/actionCreators/userThreadsActionCreator";
-import { messagesService } from '../../services/messages.service'
+import { messagesService } from "../../services/messages.service";
 import "./index.css";
-import { messagesLoadStart, messagesLoadSuccess, messagesLoadFailure } from './../../stateManagement/actions/actionCreators/messagesActionCreator';
+import {
+  messagesLoadStart,
+  messagesLoadSuccess,
+  messagesLoadFailure,
+  addMessage,
+} from "./../../stateManagement/actions/actionCreators/messagesActionCreator";
 
 export const socket = io("http://localhost:4000");
 
@@ -28,7 +33,6 @@ const Dashboard: React.FC = () => {
   });
   const users = useSelector((state: RootState) => state.usersState.users);
   const threads = useSelector((state: RootState) => state.userThreads.threads);
-  const [messages, updateMessages] = useState<any[]>([]);
 
   useEffect(() => {
     if (!usersService.getAllUsersExceptOwner) return;
@@ -38,16 +42,16 @@ const Dashboard: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // not right
-    dispatch(messagesLoadStart())
-    messagesService.get()
-    .then(data => dispatch(messagesLoadSuccess(data)))
-    .catch(() => dispatch(messagesLoadFailure()))
-  }, [])
+    dispatch(messagesLoadStart());
+    messagesService
+      .get()
+      .then((data) => dispatch(messagesLoadSuccess(data)))
+      .catch(() => dispatch(messagesLoadFailure()));
+  }, [JSON.stringify(currentUser)]);
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
-      updateMessages((prev) => [...prev, data]); // here must be dispatch
+      dispatch(addMessage(data));
     });
   }, [socket]);
 
@@ -71,9 +75,7 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
           <div className="dashboard-chat-content">
-            <Chat
-              updateMessages={updateMessages}
-            />
+            <Chat />
           </div>
           <div className="dashboard-users">
             <h1 className="dashboard-users-header">Users</h1>

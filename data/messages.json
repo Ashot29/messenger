@@ -7,19 +7,16 @@
         "UfvU9mD"
       ],
       "messages": [
-        "Fe2-hQ8",
-        "LXVG5Wf",
-        "UqjvecQ",
-        "bEJyG8z",
-        "Tj-JyiF",
-        "Axbh6Ye"
+        1,
+        2,
+        3,
+        4,
+        5
       ],
-      "updated_at": 1634901692725
+      "updated_at": 1634906281705
     },
     {
-      "messages": [
-        "2M1FHac"
-      ],
+      "messages": [],
       "members": [
         "u1Jt-qW",
         "YFLSUkO"
@@ -39,53 +36,39 @@
   ],
   "messages": [
     {
-      "id": "Fe2-hQ8",
-      "senderId": "u1Jt-qW",
-      "threadId": "3f6t-Qs",
-      "message": "Hello",
-      "createdAt": 1671617
-    },
-    {
       "threadId": "3f6t-Qs",
       "senderId": "u1Jt-qW",
-      "message": "Haylo Gago",
-      "created_at": 1634889341509,
-      "id": "LXVG5Wf"
-    },
-    {
-      "threadId": "3f6t-Qs",
-      "senderId": "u1Jt-qW",
-      "message": "Hayyyy",
-      "created_at": 1634889363508,
-      "id": "UqjvecQ"
-    },
-    {
-      "threadId": "ndax74a",
-      "senderId": "u1Jt-qW",
-      "message": "barlis",
-      "created_at": 1634898122865,
-      "id": "2M1FHac"
-    },
-    {
-      "threadId": "3f6t-Qs",
-      "senderId": "u1Jt-qW",
-      "message": "asasa",
-      "created_at": 1634901303748,
-      "id": "bEJyG8z"
-    },
-    {
-      "threadId": "3f6t-Qs",
-      "senderId": "u1Jt-qW",
-      "message": "ssssssss",
-      "created_at": 1634901506701,
-      "id": "Tj-JyiF"
+      "message": "ashot",
+      "created_at": 1634903262279,
+      "id": 1
     },
     {
       "threadId": "3f6t-Qs",
       "senderId": "UfvU9mD",
-      "message": "Barev",
-      "created_at": 1634901692661,
-      "id": "Axbh6Ye"
+      "message": "gagik",
+      "created_at": 1634903268935,
+      "id": 2
+    },
+    {
+      "threadId": "3f6t-Qs",
+      "senderId": "u1Jt-qW",
+      "message": "gags",
+      "created_at": 1634903276255,
+      "id": 3
+    },
+    {
+      "threadId": "3f6t-Qs",
+      "senderId": "u1Jt-qW",
+      "message": "Gago axperrrrrrrrrrrrrrrrrr",
+      "created_at": 1634906268435,
+      "id": 4
+    },
+    {
+      "threadId": "3f6t-Qs",
+      "senderId": "u1Jt-qW",
+      "message": "Gagik",
+      "created_at": 1634906281338,
+      "id": 5
     }
   ]
 }

@@ -3,11 +3,13 @@ import { makeStyles } from "@material-ui/core";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import SendIcon from "@mui/icons-material/Send";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../../stateManagement/reducers/rootReducer";
 import { socket } from "../..";
 import { messagesService } from "../../../../services/messages.service";
 import { threadsService } from "../../../../services/threads.service";
+import { addMessage } from "../../../../stateManagement/actions/actionCreators/messagesActionCreator";
+import { IMessage } from './../../../../services/messages.service';
 
 const theme = createTheme({
   palette: {
@@ -25,12 +27,10 @@ const useStyles = makeStyles({
   },
 });
 
-interface ChatInputProps {
-  updateMessages: any;
-}
 
-const ChatInput = ({ updateMessages }: ChatInputProps) => {
+const ChatInput = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const currentThread = useSelector((state: RootState) => state.currentThread)
   const [currentMessage, setCurrentMessage] = useState("");
   const userId = useSelector((state: RootState) => state.auth.id);
@@ -47,7 +47,8 @@ const ChatInput = ({ updateMessages }: ChatInputProps) => {
       await socket.emit("send_message", messageData);
       messagesService.post(messageData)
       .then(data => {
-        updateMessages((prev: any) => [...prev, data])
+        dispatch(addMessage(messageData))
+        // dispatch to store
         threadsService.getById(data.threadId)
         .then(thread => {
           const newMessages = thread.messages;
