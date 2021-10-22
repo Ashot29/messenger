@@ -1,4 +1,4 @@
-import { AUTH_LOADING_END_SUCCESS, AUTH_LOADING_START, AUTH_LOADING_END_FAILURE, AUTH_LOGOUT } from './../actionTypes/authActionTypes';
+import { AUTH_LOADING_END_SUCCESS, AUTH_LOADING_START, AUTH_LOADING_END_FAILURE, AUTH_LOGOUT } from '../actionTypes/authTypes';
 
 export const authLoadingStart = () => {
     return {

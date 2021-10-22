@@ -3,7 +3,7 @@ import {
   AUTH_LOADING_END_SUCCESS,
   AUTH_LOADING_END_FAILURE,
   AUTH_LOGOUT
-} from "./../actions/actionTypes/authActionTypes";
+} from "../actions/actionTypes/authTypes";
 
 const initialState = {
   token: "",

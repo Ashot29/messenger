@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
-import Button from "@material-ui/core/Button";
-import { createTheme, ThemeProvider } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { RootState } from "../../stateManagement/reducers/rootReducer";
 import UserListItem from "./userListItem/index";
@@ -13,17 +11,11 @@ import { useDispatch } from "react-redux";
 import { setAllUsers } from "./../../stateManagement/actions/actionCreators/usersActionCreator";
 import { IUser } from "./../../services/users.service";
 import { setUserInitialThreads } from "./../../stateManagement/actions/actionCreators/userThreadsActionCreator";
+import { messagesService } from '../../services/messages.service'
 import "./index.css";
+import { messagesLoadStart, messagesLoadSuccess, messagesLoadFailure } from './../../stateManagement/actions/actionCreators/messagesActionCreator';
 
 export const socket = io("http://localhost:4000");
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#ae3fdd",
-    },
-  },
-});
 
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
@@ -46,9 +38,16 @@ const Dashboard: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    // not right
+    dispatch(messagesLoadStart())
+    messagesService.get()
+    .then(data => dispatch(messagesLoadSuccess(data)))
+    .catch(() => dispatch(messagesLoadFailure()))
+  }, [])
+
+  useEffect(() => {
     socket.on("receive_message", (data) => {
-      console.log(data, "data");
-      updateMessages((prev) => [...prev, data]);
+      updateMessages((prev) => [...prev, data]); // here must be dispatch
     });
   }, [socket]);
 
@@ -73,8 +72,6 @@ const Dashboard: React.FC = () => {
           </div>
           <div className="dashboard-chat-content">
             <Chat
-              messages={messages}
-              socket={socket}
               updateMessages={updateMessages}
             />
           </div>

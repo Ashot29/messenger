@@ -4,6 +4,7 @@ export class BaseService {
   checkEmail?: any;
   getAllUsersExceptOwner?: (currentUserId: string) => Promise<any>;
   getUserThreads?: (userId: any) => Promise<any>;
+  getThreadMessages?: (id: string) => Promise<Response>;
 
   constructor(prefix: string, url: string) {
     this.url = url;

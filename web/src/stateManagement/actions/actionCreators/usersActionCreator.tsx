@@ -1,4 +1,4 @@
-import { RESET_INITIAL_USER_STATE, SET_ALL_USERS } from "../actionTypes/usersActionTypes"
+import { RESET_INITIAL_USER_STATE, SET_ALL_USERS } from "../actionTypes/usersTypes"
 import { IUser } from './../../../services/users.service';
 
 export const setAllUsers = (users: IUser[]) => {

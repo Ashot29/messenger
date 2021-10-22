@@ -6,6 +6,8 @@ import SendIcon from "@mui/icons-material/Send";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../stateManagement/reducers/rootReducer";
 import { socket } from "../..";
+import { messagesService } from "../../../../services/messages.service";
+import { threadsService } from "../../../../services/threads.service";
 
 const theme = createTheme({
   palette: {
@@ -31,22 +33,28 @@ const ChatInput = ({ updateMessages }: ChatInputProps) => {
   const classes = useStyles();
   const currentThread = useSelector((state: RootState) => state.currentThread)
   const [currentMessage, setCurrentMessage] = useState("");
-  const userName = useSelector((state: RootState) => state.auth.userName);
+  const userId = useSelector((state: RootState) => state.auth.id);
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
-        thread: currentThread.id,
-        userName,
+        threadId: currentThread.id,
+        senderId: userId,
         message: currentMessage,
-        time:
-          new Date(Date.now()).getHours() +
-          ":" +
-          new Date(Date.now()).getMinutes(),
       };
 
+      if (!messageData.threadId) return;
       await socket.emit("send_message", messageData);
-      updateMessages((prev: any) => [...prev, messageData]);
+      messagesService.post(messageData)
+      .then(data => {
+        updateMessages((prev: any) => [...prev, data])
+        threadsService.getById(data.threadId)
+        .then(thread => {
+          const newMessages = thread.messages;
+          newMessages.push(data.id)
+          threadsService.update(thread.id, {messages: newMessages})
+        })
+      })
       setCurrentMessage("");
     }
   };

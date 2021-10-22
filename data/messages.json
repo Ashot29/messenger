@@ -7,17 +7,34 @@
         "UfvU9mD"
       ],
       "messages": [
-        "Fe2-hQ8"
-      ]
+        "Fe2-hQ8",
+        "LXVG5Wf",
+        "UqjvecQ",
+        "bEJyG8z",
+        "Tj-JyiF",
+        "Axbh6Ye"
+      ],
+      "updated_at": 1634901692725
     },
     {
-      "messages": [],
+      "messages": [
+        "2M1FHac"
+      ],
       "members": [
         "u1Jt-qW",
         "YFLSUkO"
       ],
       "created_at": 1634829861078,
       "id": "ndax74a"
+    },
+    {
+      "messages": [],
+      "members": [
+        "YFLSUkO",
+        "UfvU9mD"
+      ],
+      "created_at": 1634831851509,
+      "id": "D2h3oBJ"
     }
   ],
   "messages": [
@@ -25,8 +42,50 @@
       "id": "Fe2-hQ8",
       "senderId": "u1Jt-qW",
       "threadId": "3f6t-Qs",
-      "text": "Hello",
+      "message": "Hello",
       "createdAt": 1671617
+    },
+    {
+      "threadId": "3f6t-Qs",
+      "senderId": "u1Jt-qW",
+      "message": "Haylo Gago",
+      "created_at": 1634889341509,
+      "id": "LXVG5Wf"
+    },
+    {
+      "threadId": "3f6t-Qs",
+      "senderId": "u1Jt-qW",
+      "message": "Hayyyy",
+      "created_at": 1634889363508,
+      "id": "UqjvecQ"
+    },
+    {
+      "threadId": "ndax74a",
+      "senderId": "u1Jt-qW",
+      "message": "barlis",
+      "created_at": 1634898122865,
+      "id": "2M1FHac"
+    },
+    {
+      "threadId": "3f6t-Qs",
+      "senderId": "u1Jt-qW",
+      "message": "asasa",
+      "created_at": 1634901303748,
+      "id": "bEJyG8z"
+    },
+    {
+      "threadId": "3f6t-Qs",
+      "senderId": "u1Jt-qW",
+      "message": "ssssssss",
+      "created_at": 1634901506701,
+      "id": "Tj-JyiF"
+    },
+    {
+      "threadId": "3f6t-Qs",
+      "senderId": "UfvU9mD",
+      "message": "Barev",
+      "created_at": 1634901692661,
+      "id": "Axbh6Ye"
     }
   ]
 }

@@ -1,5 +1,5 @@
-import { SET_ALL_USERS } from './../actions/actionTypes/usersActionTypes';
-import { RESET_INITIAL_USER_STATE } from './../actions/actionTypes/usersActionTypes';
+import { SET_ALL_USERS } from '../actions/actionTypes/usersTypes';
+import { RESET_INITIAL_USER_STATE } from '../actions/actionTypes/usersTypes';
 
 const initialState = {
     users: []

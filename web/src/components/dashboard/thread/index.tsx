@@ -44,7 +44,6 @@ const Thread = ({ thread }: ThreadProps) => {
       key={thread.id}
       className="thread"
       onClick={() => {
-        console.log(thread)
         enterThread(thread.id)
       }}
     >
