@@ -6,17 +6,9 @@
         "u1Jt-qW",
         "UfvU9mD"
       ],
-      "messages": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ],
       "updated_at": 1634906281705
     },
     {
-      "messages": [],
       "members": [
         "u1Jt-qW",
         "YFLSUkO"
@@ -25,7 +17,6 @@
       "id": "ndax74a"
     },
     {
-      "messages": [],
       "members": [
         "YFLSUkO",
         "UfvU9mD"
@@ -40,35 +31,28 @@
       "senderId": "u1Jt-qW",
       "message": "ashot",
       "created_at": 1634903262279,
-      "id": 1
+      "id": "a7Y-uI8"
     },
     {
       "threadId": "3f6t-Qs",
       "senderId": "UfvU9mD",
-      "message": "gagik",
-      "created_at": 1634903268935,
-      "id": 2
+      "message": "Ashot",
+      "created_at": 1634910349993,
+      "id": "BBUrrhS"
     },
     {
       "threadId": "3f6t-Qs",
       "senderId": "u1Jt-qW",
-      "message": "gags",
-      "created_at": 1634903276255,
-      "id": 3
+      "message": "asasas",
+      "created_at": 1634910961162,
+      "id": "FxDp34v"
     },
     {
       "threadId": "3f6t-Qs",
-      "senderId": "u1Jt-qW",
-      "message": "Gago axperrrrrrrrrrrrrrrrrr",
-      "created_at": 1634906268435,
-      "id": 4
-    },
-    {
-      "threadId": "3f6t-Qs",
-      "senderId": "u1Jt-qW",
-      "message": "Gagik",
-      "created_at": 1634906281338,
-      "id": 5
+      "senderId": "UfvU9mD",
+      "message": "asas",
+      "created_at": 1634910972096,
+      "id": "xKnd96L"
     }
   ]
 }

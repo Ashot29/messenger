@@ -4,7 +4,6 @@ import { MESSAGES_URL } from "../constants/url";
 export interface IThread {
   id: string;
   members: string[];
-  messages: string[];
 }
 
 export const threadsService = new BaseService("threads", MESSAGES_URL);

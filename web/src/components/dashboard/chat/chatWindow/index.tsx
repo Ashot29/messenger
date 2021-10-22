@@ -3,9 +3,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from "../../../../stateManagement/reducers/rootReducer";
 import { IMessage } from './../../../../services/messages.service';
 
-interface ChatProps {
-  messages: any[]
-}
 
 const ChatWindow = () => {
   const userId = useSelector((state: RootState) => state.auth.id);

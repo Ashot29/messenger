@@ -47,14 +47,7 @@ const ChatInput = () => {
       await socket.emit("send_message", messageData);
       messagesService.post(messageData)
       .then(data => {
-        dispatch(addMessage(messageData))
-        // dispatch to store
-        threadsService.getById(data.threadId)
-        .then(thread => {
-          const newMessages = thread.messages;
-          newMessages.push(data.id)
-          threadsService.update(thread.id, {messages: newMessages})
-        })
+        dispatch(addMessage(data))
       })
       setCurrentMessage("");
     }

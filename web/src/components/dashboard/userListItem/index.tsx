@@ -30,7 +30,6 @@ const UserListItem = ({ user }: UserListItemProps) => {
   function addNewThread(id1: string | undefined, id2: string | undefined) {
     if (!id1 || !id2) return;
     const threadData = {
-      messages: [],
       members: [id1, id2],
     };
     dispatch(addThread(threadData));

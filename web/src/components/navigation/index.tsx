@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { resetInitialUserState } from "../../stateManagement/actions/actionCreators/usersActionCreator";
 import { resetUserThreads } from "../../stateManagement/actions/actionCreators/userThreadsActionCreator";
 import { resetCurrentThread } from "../../stateManagement/actions/actionCreators/currentThreadActionCreator";
+import { resetMessages } from './../../stateManagement/actions/actionCreators/messagesActionCreator';
 
 const Navigation: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const Navigation: React.FC = () => {
     dispatch(resetCurrentThread())
     dispatch(resetInitialUserState())
     dispatch(resetUserThreads())
+    dispatch(resetMessages())
   };
 
   const navLink = !isAuth ? (

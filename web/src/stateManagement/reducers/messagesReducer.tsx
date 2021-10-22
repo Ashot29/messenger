@@ -1,4 +1,4 @@
-import { MESSAGES_LOAD_START, MESSAGES_LOAD_SUCCESS, MESSAGES_LOAD_FAILURE, ADD_MESSAGE } from './../actions/actionTypes/messagesTypes';
+import { MESSAGES_LOAD_START, MESSAGES_LOAD_SUCCESS, MESSAGES_LOAD_FAILURE, ADD_MESSAGE, RESET_MESSAGES } from './../actions/actionTypes/messagesTypes';
 
 const initialState = {
   messages: [],
@@ -28,6 +28,11 @@ export const messagesReducer = (state: any = initialState, action: any) => {
       return {
         ...state,
         messages: [...state.messages, action.payload]
+      }
+    case RESET_MESSAGES:
+      return {
+        messages: [],
+        loading: false
       }
     default:
       return state;
